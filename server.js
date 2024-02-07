@@ -24,8 +24,9 @@ io.on('connection', (socket) => {
     socket.on("trucking",(btnKaMsg)=>{
         const room = btnKaMsg.room;
         socket.join(room);
+        socket.emit("room connected","Ho gaya room connection");
         console.log("location",btnKaMsg);
-        socket.in(room).emit("message recieved",btnKaMsg);
+        socket.to(room).emit("message recieved",btnKaMsg);
         io.to(room).emit("track location",btnKaMsg);
         console.log("Done");
     })
